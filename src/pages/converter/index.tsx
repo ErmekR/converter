@@ -1,14 +1,11 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
 import useStyles from '../../styles';
 import { inject, observer } from 'mobx-react';
 import ConverterStore from '../../stores/converterStore';
+import FormComponent from './components/formCompnent';
+import ConverterInput from './components/converterInput';
 
 type TConverter = {
   converterStore?: ConverterStore;
@@ -50,69 +47,22 @@ const Converter = inject('converterStore')(
         className={classes.paper}
         elevation={0}
       >
+        <ConverterInput data={converterStore?.data} />
         <Grid container className={classes.gridContainer}>
-          <Grid
-            className={classes.grid}
-            item
-            xs={6}
-          >
-            <FormControl
-              className={classes.formControl}
-              variant="outlined"
-              fullWidth
-            >
-              <InputLabel id="demo-simple-select-outlined-label">Валюта</InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={selectFrom}
-                onChange={(e: any) => setSelectFrom(e.target.value)}
-                label="Валюта"
-              >
-                {converterStore?.data?.map((item) => <MenuItem value={item.name}>{item.name}</MenuItem>)}
-              </Select>
-            </FormControl>
-            <TextField
-              className={classes.textField}
-              label="Количество"
-              variant="outlined"
-              value={inputFrom}
-              onChange={(e: any) => onChange(e.target.value, true)}
-              type="number"
-              fullWidth
-            />
-          </Grid>
-          <Grid
-            className={classes.grid}
-            item
-            xs={6}
-          >
-            <FormControl
-              className={classes.formControl}
-              variant="outlined"
-              fullWidth
-            >
-              <InputLabel id="demo-simple-select-outlined-label">Валюта</InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={selectTo}
-                onChange={(e: any) => setSelectTo(e.target.value)}
-                label="Валюта"
-              >
-              {converterStore?.data?.map((item) => <MenuItem value={item.name}>{item.name}</MenuItem>)}
-              </Select>
-            </FormControl>
-            <TextField
-              className={classes.textField}
-              label="Количество"
-              variant="outlined"
-              value={inputTo}
-              onChange={(e: any) => onChange(e.target.value, false)}
-              type="number"
-              fullWidth
-            />
-          </Grid>
+          <FormComponent
+            selectValue={selectFrom}
+            selectOnChange={(e: any) => setSelectFrom(e.target.value)}
+            inputValue={inputFrom}
+            inputOnChange={(e: any) => onChange(e.target.value, true)}
+            data={converterStore?.data}
+          />
+          <FormComponent
+            selectValue={selectTo}
+            selectOnChange={(e: any) => setSelectTo(e.target.value)}
+            inputValue={inputTo}
+            inputOnChange={(e: any) => onChange(e.target.value, false)}
+            data={converterStore?.data}
+          />
         </Grid>
       </Paper>
     );

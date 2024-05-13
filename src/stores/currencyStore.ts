@@ -1,8 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { TCurrency } from "../types";
 import axios from "axios";
-
-const token = 'Squs5cHMVJbAhQac6JehrUdDLJyRuxxqhVIcZ5Zc3ea5d351';
+import { token } from "./helper";
 
 class CurrencyStore {
     data: TCurrency[] | null = null
@@ -36,6 +35,7 @@ class CurrencyStore {
 
 function prepareData(data: any) {
   return [
+    { name: 'Сом', sell: 1, buy: 1 },
     { name: 'Рубль', sell: data.sell_rub, buy: data.buy_rub },
     { name: 'Доллар', sell: data.sell_usd, buy: data.buy_usd },
     { name: 'Евро', sell: data.sell_eur, buy: data.buy_eur },

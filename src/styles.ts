@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
     },
     formControl: {
+      marginBottom: theme.spacing(2),
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -43,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(1),
       width: 200,
     },
+    boxTextField: {
+      padding: theme.spacing(2),
+    }
   }),
 );
 
